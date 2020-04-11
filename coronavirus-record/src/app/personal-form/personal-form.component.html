@@ -1,0 +1,64 @@
+<form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+
+  <div class="ui-g">
+    <label class="ui-g-12 ui-md-6 ui-lg-3">Name
+      <div>
+        <input pInputText type="text" formControlName="fullName">
+      </div>
+    </label>
+
+    <label class="ui-g-12 ui-md-6 ui-lg-2">
+      Age
+      <div>
+        <input pInputText type="number" min='1' max='120' formControlName="age">
+      </div>
+    </label>
+    <span class="ui-g-12 ui-md-6 ui-lg-3">
+      <label>Gender
+        <div style="padding: 5px">
+        <span style="margin-left: 5px ">
+          <p-radioButton name="gender" value="Male" label="Male" formControlName="gender"></p-radioButton>
+        <span style="margin-left: 5px">
+          <p-radioButton name="gender" value="Female" label="Female" formControlName="gender"></p-radioButton>
+        </span>
+        </span>
+          </div>
+            </label>
+
+      </span>
+  </div>
+
+
+  <div class="ui-g">
+    <label  class="ui-g-12 ui-md-6 ui-lg-4">Country
+      <div>
+        <p-dropdown [options]="countryOption" (onChange)="loadCity($event.value)" formControlName="country"></p-dropdown>
+      </div>
+    </label>
+    <label class="ui-g-12 ui-md-6 ui-lg-4">City
+      <div>
+        <p-dropdown [options]="cityOption" formControlName="city"></p-dropdown>
+      </div>
+    </label>
+  </div>
+
+
+
+  <div class="ui-g">
+
+    <label class="ui-g-12 ui-md-6 ui-lg-4">Have you been diagnosed with Corona (Covid-19)?
+      <div>
+        <p-dropdown [options]="haveDiagnosedOption" (onChange)="onDiagnosedChange($event)" formControlName="haveDiagnosed"></p-dropdown>
+      </div>
+    </label>
+    <span class="ui-g-12 ui-md-6 ui-lg-4" *ngIf="diagnosed">
+        <label>Are you suffering from one of this symptoms?
+          <div>
+            <p-dropdown [options]="diagnosedOption" formControlName="symptoms"></p-dropdown>
+          </div>
+        </label>
+      </span>
+  </div>
+  <p-button label="Next" type="submit" icon="pi pi-chevron-right" iconPos="right" [disabled]="!personalForm.valid" ></p-button>
+
+</form>

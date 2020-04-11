@@ -1,0 +1,17 @@
+<div class="ui-g">
+  <span class="ui-g-12 ui-md-3">
+    <img *ngIf="blobUrls.length != 3" (mousedown)="startRecording()" (mouseup)="stopRecording()" type="button" src="../../assets/{{image}}"/>
+  </span>
+  <span class="ui-g-12 ui-md-9">
+  <div *ngFor="let blobUrl of blobUrls; let i = index">
+    <audio  controls>
+      <source [src]="blobUrl" type="audio/webm">
+    </audio>
+    <button pButton (click)="clearRecordedData(i)" class="ui-button-danger"><i class="pi pi-trash"></i></button>
+  </div>
+  </span>
+</div>
+
+<p-button  type="button" icon="pi pi-chevron-left" label="Back" (click)="onBack()"></p-button>
+<p-button [disabled]="blobUrls.length !== 3" (click)="onSubmit()" type="button" label="Submit"></p-button>
+

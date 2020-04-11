@@ -1,0 +1,11 @@
+::ng-deep app-cough-step > div > span > div > button.ui-button  {
+  padding: 3px;
+  i.pi {
+    font-size: 1.75em;
+  }
+
+  span.ui-button-text.ui-clickable {
+    display: none;
+  }
+}
+

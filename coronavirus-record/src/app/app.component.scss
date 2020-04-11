@@ -9,7 +9,11 @@
   font-weight: 300;
 }
 
-p-dropdown, input {
-  display: inline-grid;
-  width: 100% !important;
+
+::ng-deep .ui-steps .ui-steps-item {
+  width: 33.333%;
+}
+
+::ng-deep p-button {
+  margin: 5px;
 }

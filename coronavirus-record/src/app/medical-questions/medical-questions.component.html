@@ -1,0 +1,14 @@
+<form [formGroup]="medicalForm" (ngSubmit)="onSubmit()">
+
+  <div class="ui-g">
+    <label class="ui-g-12 ui-md-6 ui-lg-3">question1
+      <div>
+        <input pInputText type="text" formControlName="question1">
+      </div>
+    </label>
+
+  </div>
+  <p-button label="Back" icon="pi pi-chevron-left" (click)="onBack()"></p-button>
+  <p-button label="Next" icon="pi pi-chevron-right" iconPos="right"  type="submit" [disabled]="!medicalForm.valid" ></p-button>
+
+</form>
