@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MenuItem, MessageService} from 'primeng/api';
+import {MenuItem} from 'primeng/api';
 import {CoronavirusService} from './coronavirus.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent {
   dataAsSent = false;
   dataRequest = {personalData: null, medicallData: null, coughData: null};
 
-  constructor(private coronavirusService: CoronavirusService,    private messageService: MessageService) {
+  constructor(private coronavirusService: CoronavirusService) {
     this.items = [{
       label: 'Personal',
       command: (event: any) => {
@@ -57,11 +57,17 @@ export class AppComponent {
     console.log(value);
     this.dataRequest.coughData = value;
     this.coronavirusService.getIPAddress().subscribe(ip => {
-      const data = this.dataRequest.personalData.value;
-      data.ip = ip.ip;
-      data.cough =  this.dataRequest.coughData.blobUrlsData;
-      this.coronavirusService.savePatient(data).subscribe(res => {
-        this.messageService.add({severity: 'info', summary: 'Result', detail: res});
+      const dataFile: FormData = new FormData();
+      this.dataRequest.coughData.blobUrlsData.map(item => dataFile.append('cough', item, item.name));
+
+      const patient = this.dataRequest.personalData.value;
+      patient.ip = ip.ip;
+      patient.diagnosed = patient.symptoms !== '';
+      dataFile.append('patient', new Blob([ JSON.stringify(patient) ], {type: 'application/json'}));
+      this.coronavirusService.savePatient(dataFile).subscribe(res => {
+        this.dataAsSent = false;
+        this.activeIndex = 0;
+        this.dataRequest = {personalData: null, medicallData: null, coughData: null};
 
       });
     });

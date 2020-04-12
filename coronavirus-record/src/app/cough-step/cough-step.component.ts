@@ -33,16 +33,14 @@ export class CoughStepComponent implements OnDestroy {
     });
 
     this.audioRecordingService.getRecordedTime().subscribe((time) => {
-      if (time === '00:04') {
+      if (time === '00:02') {
         this.stopRecording();
       }
       this.recordedTime = time;
     });
 
     this.audioRecordingService.getRecordedBlob().subscribe((data) => {
-      const dataFile: FormData = new FormData();
-      dataFile.append('file',  new File([data.blob], "voice.mp3") );
-      this.blobUrlsData.push(dataFile);
+      this.blobUrlsData.push(data.blob);
       this.blobUrls.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob)));
     });
   }

@@ -26,7 +26,6 @@ public class Patient {
     public boolean diagnosed;
     public String symptoms;
     public String ip;
-    public List<MultipartFile> cough;
 
     public Patient() {}
 

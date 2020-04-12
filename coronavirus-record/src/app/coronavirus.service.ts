@@ -45,7 +45,6 @@ export class CoronavirusService {
   }
 
   savePatient(patient): Observable<any> {
-    patient.diagnosed = patient.symptoms !== '';
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
