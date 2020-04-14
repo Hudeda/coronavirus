@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CoronavirusService} from '../coronavirus.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

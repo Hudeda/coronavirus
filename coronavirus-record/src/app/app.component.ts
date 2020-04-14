@@ -11,7 +11,7 @@ export class AppComponent {
   items: MenuItem[];
   activeIndex = 0;
   dataAsSent = false;
-  dataRequest = {personalData: null, medicallData: null, coughData: null};
+  dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
 
   constructor(private coronavirusService: CoronavirusService) {
     this.items = [{
@@ -52,6 +52,11 @@ export class AppComponent {
     this.dataRequest.medicallData = value;
   }
 
+  sniffData(value) {
+    this.activeIndex = 3;
+    this.dataRequest.sniffData = value;
+  }
+
   medicalBack(value) {
     this.activeIndex = 0;
     this.dataRequest.medicallData = value;
@@ -73,15 +78,20 @@ export class AppComponent {
       this.coronavirusService.savePatient(dataFile).subscribe(res => {
         this.dataAsSent = false;
         this.activeIndex = 0;
-        this.dataRequest = {personalData: null, medicallData: null, coughData: null};
+        this.dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
 
       });
     });
   }
 
   coughBack(value) {
-    this.activeIndex = 1;
+    this.activeIndex = 2;
     this.dataRequest.coughData = value;
+  }
+
+  sniffBack(value) {
+    this.activeIndex = 1;
+    this.dataRequest.sniffData = value;
   }
 
 }

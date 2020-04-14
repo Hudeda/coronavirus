@@ -10,7 +10,7 @@ import {
   ButtonModule,
   DropdownModule,
   StepsModule,
-  ProgressSpinnerModule, MessageService, CheckboxModule
+  ProgressSpinnerModule, MessageService, CheckboxModule, SliderModule
 } from 'primeng/primeng';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PersonalFormComponent } from './personal-form/personal-form.component';
@@ -40,7 +40,8 @@ import { SniffStepComponent } from './sniff-step/sniff-step.component';
     DropdownModule,
     StepsModule,
     ProgressSpinnerModule,
-    CheckboxModule
+    CheckboxModule,
+    SliderModule
 
   ],
   providers: [AudioRecordingService, MessageService],

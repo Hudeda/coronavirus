@@ -1,1 +1,71 @@
-<p>sniff-step works!</p>
+<div class="jumbotron">
+  <p class="lead">Please prepare your pre-selected odorants: Vanilla extract, Peanut butter, Mustard (Dijon),
+<br>garlic (freshly chopped), Your toothpaste</p>
+  <br>
+  <p class="lead">Sniff them as often as you like. Drag the bullets indicator along the sliders to<br>indicate to what extent the odor is...</p>
+</div>
+<form [formGroup]="sniffForm" (ngSubmit)="onSubmit()">
+  <div class="ui-g">
+    <label class="ui-g-12 ui-md-6">Vanilla Extract
+      <div><br>
+        <span class="ui-g-2">Unpleasant</span>
+        <p-slider class="ui-g-8"formControlName="vanillaExtractPleasant"></p-slider>
+        <span class="ui-g-2">Pleasant</span>
+      </div>
+      <div><br><br>
+        <span class="ui-g-2">Weak</span>
+        <p-slider class="ui-g-8"formControlName="vanillaExtractStrong"></p-slider>
+        <span class="ui-g-2">Strong</span>
+      </div>
+    </label>
+
+
+    <label class="ui-g-12 ui-md-6">Peanut Butter
+      <div><br>
+        <span class="ui-g-2">Unpleasant</span>
+        <p-slider class="ui-g-8"formControlName="peanutButterPleasant"></p-slider>
+        <span class="ui-g-2">Pleasant</span>
+      </div>
+      <div><br><br>
+        <span class="ui-g-2">Weak</span>
+        <p-slider class="ui-g-8"formControlName="peanutButterStrong"></p-slider>
+        <span class="ui-g-2">Strong</span>
+      </div>
+    </label>
+  </div>
+
+
+  <div class="ui-g">
+
+    <label class="ui-g-12 ui-md-6">Mustard Dijon
+      <div><br>
+        <span class="ui-g-2">Unpleasant</span>
+        <p-slider class="ui-g-8"formControlName="mustardDijonPleasant"></p-slider>
+        <span class="ui-g-2">Pleasant</span>
+      </div>
+      <div><br><br>
+        <span class="ui-g-2">Weak</span>
+        <p-slider class="ui-g-8"formControlName="mustardDijonStrong"></p-slider>
+        <span class="ui-g-2">Strong</span>
+      </div>
+    </label>
+
+
+    <label class="ui-g-12 ui-md-6" style="padding: 20px">Garlic Freshly Chopped
+      <div><br>
+        <span class="ui-g-2">Unpleasant</span>
+        <p-slider class="ui-g-8"formControlName="garlicFreshlyChoppedPleasant"></p-slider>
+        <span class="ui-g-2">Pleasant</span>
+      </div>
+      <div><br><br>
+        <span class="ui-g-2">Weak</span>
+        <p-slider class="ui-g-8"formControlName="garlicFreshlyChoppedStrong"></p-slider>
+        <span class="ui-g-2">Strong</span>
+      </div>
+    </label>
+  </div>
+
+  <p-button label="Back" icon="pi pi-chevron-left" (click)="onBack()"></p-button>
+  <p-button label="Next" icon="pi pi-chevron-right" iconPos="right"  type="submit" [disabled]="!sniffForm.valid" ></p-button>
+
+</form>

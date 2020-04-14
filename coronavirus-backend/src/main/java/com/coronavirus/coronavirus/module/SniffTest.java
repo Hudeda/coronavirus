@@ -5,7 +5,7 @@ public class SniffTest {
     public int vanillaExtract;
     public int peanutButter;
     public int mustardDijon;
-    public int GarlicFreshlyChopped;
+    public int garlicFreshlyChopped;
 
     public SniffTest() {
     }
