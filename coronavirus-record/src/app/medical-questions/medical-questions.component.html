@@ -1,14 +1,45 @@
 <form [formGroup]="medicalForm" (ngSubmit)="onSubmit()">
 
   <div class="ui-g">
-    <label class="ui-g-12 ui-md-6 ui-lg-3">question1
-      <div>
-        <input pInputText type="text" formControlName="question1">
-      </div>
-    </label>
-
+      <label class="ui-g-12 ui-md-6 ui-lg-3">Are you suffering from one of this symptoms?
+        <div>
+          <p-dropdown [options]="diagnosedOption" formControlName="hasBeenTest" [placeholder]="'Choose'"></p-dropdown>
+        </div>
+      </label>
   </div>
-  <p-button label="Back" icon="pi pi-chevron-left" (click)="onBack()"></p-button>
-  <p-button label="Next" icon="pi pi-chevron-right" iconPos="right"  type="submit" [disabled]="!medicalForm.valid" ></p-button>
+
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Fever" formControlName="fever"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Cough" formControlName="cough"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Shortness Of Breath Or Difficulty" formControlName="shortnessOfBreathOrDifficulty"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Tiredness" formControlName="tiredness"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Aches" formControlName="aches"></p-checkbox>
+  </div>
+  <div class="ui-g" >
+    <p-checkbox class="ui-g-3" label="Runny Nose" name="runnyNose" formControlName="runnyNose"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Sore Throat" formControlName="soreThroat"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Loss Of The Sense Of Smell" formControlName="lossOfTheSenseOfSmell"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="Loss Of Taste" formControlName="lossOfTaste"></p-checkbox>
+  </div>
+  <div class="ui-g">
+    <p-checkbox class="ui-g-3" label="No Symptoms" formControlName="noSymptoms"></p-checkbox>
+  </div>
+
+<p-button label="Back" icon="pi pi-chevron-left" (click)="onBack()"></p-button>
+<p-button label="Next" icon="pi pi-chevron-right" iconPos="right"  type="submit" [disabled]="!medicalForm.valid" ></p-button>
 
 </form>

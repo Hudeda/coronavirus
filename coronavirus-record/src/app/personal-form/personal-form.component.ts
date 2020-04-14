@@ -10,11 +10,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class PersonalFormComponent implements OnInit {
 
   private personalForm: FormGroup;
-  private haveDiagnosedOption;
   private cityOption = [];
   private countryOption = [];
-  private diagnosedOption = [];
-  private diagnosed = false;
 
   @Output() personalData = new EventEmitter();
 
@@ -24,9 +21,6 @@ export class PersonalFormComponent implements OnInit {
       this.cityOption.push({label: value.value.city, value: value.value.city});
       this.personalForm = value;
       this.loadCity(value.value.country);
-      if(value.value.haveDiagnosed === 'Yes') {
-        this.diagnosed = true;
-      }
     }
   }
 
@@ -39,28 +33,13 @@ export class PersonalFormComponent implements OnInit {
       });
     });
 
-    this.haveDiagnosedOption = [
-      {label: 'No', value: 'No'},
-      {label: 'Yes', value: 'Yes'}
-    ];
-
-    this.diagnosedOption = [
-      {label: 'Not showing any symptoms at all', value: 'No'},
-      {label: 'Lightly infected', value: 'Lightly'},
-      {label: 'Serious condition', value: 'Serious'},
-      {label: 'Critical condition', value: 'Critical'},
-      {label: 'On a respirator', value: 'Respirator'}
-    ];
-
     this.personalForm = this.fb.group({
       fullName: [, Validators.required],
       age: [, Validators.required],
       gender: [, Validators.required],
       city: [, Validators.required],
       country: [, Validators.required],
-      symptoms: [''],
-      haveDiagnosed: ['No']
-
+      email: [, [Validators.required, Validators.email]]
     });
   }
   ngOnInit() {
@@ -71,9 +50,6 @@ export class PersonalFormComponent implements OnInit {
       this.personalData.emit(this.personalForm);
   }
 
-  onDiagnosedChange(event) {
-    this.diagnosed = event.value === 'Yes';
-  }
 
   loadCity(event) {
     this.cityOption = [];

@@ -12,17 +12,31 @@ export class MedicalQuestionsComponent implements OnInit {
   private medicalForm: FormGroup;
   @Output() medicalData = new EventEmitter();
   @Output() onBackEvent = new EventEmitter();
-
+  diagnosedOption;
   @Input() set data(value) {
     if (value) {
       this.medicalForm = value;
     }
   }
-
   constructor(private fb: FormBuilder) {
-
+    this.diagnosedOption = [
+      {label: 'Not Tested', value: 'NOT_TESTED'},
+      {label: 'Result Pending', value: 'RESULTS_PENDING'},
+      {label: 'Tested Negative', value: 'TESTED_NEGATIVE'},
+      {label: 'Tested Positive', value: 'TESTED_POSITIVE'},
+    ];
     this.medicalForm = this.fb.group({
-      question1: [, Validators.required]
+      hasBeenTest: [, Validators.required],
+      fever: [],
+      cough: [],
+      shortnessOfBreathOrDifficulty: [],
+      tiredness: [],
+      aches: [],
+      runnyNose: [],
+      soreThroat: [],
+      lossOfTheSenseOfSmell: [],
+      lossOfTaste: [],
+      noSymptoms: []
     });
   }
 

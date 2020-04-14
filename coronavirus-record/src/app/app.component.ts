@@ -27,9 +27,15 @@ export class AppComponent {
         }
       },
       {
-        label: 'Cough Step',
+        label: 'Sniff Step',
         command: (event: any) => {
           this.activeIndex = 2;
+        }
+      },
+      {
+        label: 'Cough Step',
+        command: (event: any) => {
+          this.activeIndex = 3;
         }
       },
     ];
@@ -53,7 +59,7 @@ export class AppComponent {
 
   coughData(value) {
     this.dataAsSent = true;
-    this.activeIndex = 3;
+    this.activeIndex = 4;
     console.log(value);
     this.dataRequest.coughData = value;
     this.coronavirusService.getIPAddress().subscribe(ip => {
@@ -62,7 +68,7 @@ export class AppComponent {
 
       const patient = this.dataRequest.personalData.value;
       patient.ip = ip.ip;
-      patient.diagnosed = patient.symptoms !== '';
+      patient.medicalQuestion = this.dataRequest.medicallData;
       dataFile.append('patient', new Blob([ JSON.stringify(patient) ], {type: 'application/json'}));
       this.coronavirusService.savePatient(dataFile).subscribe(res => {
         this.dataAsSent = false;

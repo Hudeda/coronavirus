@@ -10,20 +10,22 @@ import {
   ButtonModule,
   DropdownModule,
   StepsModule,
-  ProgressSpinnerModule, MessageService
+  ProgressSpinnerModule, MessageService, CheckboxModule
 } from 'primeng/primeng';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PersonalFormComponent } from './personal-form/personal-form.component';
 import { MedicalQuestionsComponent } from './medical-questions/medical-questions.component';
 import { CoughStepComponent } from './cough-step/cough-step.component';
 import {AudioRecordingService} from './audio-recording.service';
+import { SniffStepComponent } from './sniff-step/sniff-step.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonalFormComponent,
     MedicalQuestionsComponent,
-    CoughStepComponent
+    CoughStepComponent,
+    SniffStepComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import {AudioRecordingService} from './audio-recording.service';
     MultiSelectModule,
     DropdownModule,
     StepsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CheckboxModule
 
   ],
   providers: [AudioRecordingService, MessageService],

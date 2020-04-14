@@ -23,9 +23,10 @@ public class Patient {
     public String gender;
     public String country;
     public String city;
-    public boolean diagnosed;
-    public String symptoms;
+    public String email;
     public String ip;
+    public MedicalQuestion medicalQuestion;
+    public SniffTest sniffTest;
 
     public Patient() {}
 

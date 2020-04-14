@@ -45,19 +45,12 @@
 
 
   <div class="ui-g">
-
-    <label class="ui-g-12 ui-md-6 ui-lg-4">Have you been diagnosed with Corona (Covid-19)?
+    <label class="ui-g-12 ui-md-3">
+      Email
       <div>
-        <p-dropdown [options]="haveDiagnosedOption" (onChange)="onDiagnosedChange($event)" formControlName="haveDiagnosed"></p-dropdown>
+        <input pInputText type="text" formControlName="email">
       </div>
     </label>
-    <span class="ui-g-12 ui-md-6 ui-lg-4" *ngIf="diagnosed">
-        <label>Are you suffering from one of this symptoms?
-          <div>
-            <p-dropdown [options]="diagnosedOption" formControlName="symptoms"></p-dropdown>
-          </div>
-        </label>
-      </span>
   </div>
   <p-button label="Next" type="submit" icon="pi pi-chevron-right" iconPos="right" [disabled]="!personalForm.valid" ></p-button>
 

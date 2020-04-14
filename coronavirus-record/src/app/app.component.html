@@ -14,7 +14,8 @@
 
   <app-personal-form *ngIf="activeIndex === 0" [data]="dataRequest.personalData" (personalData)="personalData($event)"></app-personal-form>
   <app-medical-questions *ngIf="activeIndex === 1" [data]="dataRequest.medicallData" (onBackEvent)="medicalBack($event)" (medicalData)="medicalData($event)"></app-medical-questions>
-  <app-cough-step *ngIf="activeIndex === 2" [data]="dataRequest.coughData" (onBackEvent)="coughBack($event)" (coughData)="coughData($event)"></app-cough-step>
+  <app-sniff-step *ngIf="activeIndex === 2"></app-sniff-step>
+  <app-cough-step *ngIf="activeIndex === 3" [data]="dataRequest.coughData" (onBackEvent)="coughBack($event)" (coughData)="coughData($event)"></app-cough-step>
 
   <div *ngIf="dataAsSent">
     <h1> Process Data Please wait... </h1>
