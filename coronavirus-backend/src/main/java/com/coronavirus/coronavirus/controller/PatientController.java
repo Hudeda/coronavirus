@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/patient")
@@ -42,10 +43,23 @@ public class PatientController {
         return patientRepository.findPatientByCountry(country);
     }
 
+    @GetMapping("valid/{email}")
+    public int getExistingEmail(@PathVariable String email) throws IOException {
+        String path = new File(new File(".").getAbsolutePath()).getCanonicalPath() +"/records/" + email;
+        return Files.exists(Paths.get(path)) ? Objects.requireNonNull(new File(path).list()).length: 0;
+    }
+
     @PostMapping
     public Patient createPatient(@RequestPart(value = "cough") List<MultipartFile> cough,
-                                 @RequestPart(value = "patient") Patient patient) {
-        File file = new File(this.getClass().getResource("/").getPath() +"records/" + patient.fullName);
+                                 @RequestPart(value = "patient") Patient patient) throws IOException {
+        String path = new File(new File(".").getAbsolutePath()).getCanonicalPath() +"/records/" + patient.email;
+        File file;
+        if(Files.notExists(Paths.get(path))) {
+            file = new File(path + "/v1");
+        } else {
+            int versionNumber = Objects.requireNonNull(new File(path).list()).length + 1;
+            file = new File(path + "/v" + versionNumber);
+        }
         file.mkdirs();
         for(int i = 0;  i < cough.size(); i++){
             write(cough.get(i), Paths.get(file.getPath()), i);
@@ -62,4 +76,5 @@ public class PatientController {
             e.printStackTrace();
         }
     }
+
 }

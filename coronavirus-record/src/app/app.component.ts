@@ -70,17 +70,22 @@ export class AppComponent {
     this.coronavirusService.getIPAddress().subscribe(ip => {
       const dataFile: FormData = new FormData();
       this.dataRequest.coughData.blobUrlsData.map(item => dataFile.append('cough', item, item.name));
+      try {
+        const patient = this.dataRequest.personalData.value;
+        patient.ip = ip.ip;
+        patient.medicalQuestion = this.dataRequest.medicallData.value;
+        patient.sniffTest = this.dataRequest.sniffData.value;
+        dataFile.append('patient', new Blob([ JSON.stringify(patient) ], {type: 'application/json'}));
+        this.coronavirusService.savePatient(dataFile).subscribe(res => {
+          this.dataAsSent = false;
+          this.activeIndex = 0;
+          this.dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
 
-      const patient = this.dataRequest.personalData.value;
-      patient.ip = ip.ip;
-      patient.medicalQuestion = this.dataRequest.medicallData;
-      dataFile.append('patient', new Blob([ JSON.stringify(patient) ], {type: 'application/json'}));
-      this.coronavirusService.savePatient(dataFile).subscribe(res => {
+        });
+      } catch (e) {
+        this.activeIndex = 3;
         this.dataAsSent = false;
-        this.activeIndex = 0;
-        this.dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
-
-      });
+      }
     });
   }
 

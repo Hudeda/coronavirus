@@ -5,6 +5,7 @@
       <div>
         <input pInputText type="text" formControlName="fullName">
       </div>
+      <div class="validation" *ngIf="checkValidation('fullName') != '' && personalForm.get('fullName').touched">{{checkValidation('fullName')}}</div>
     </label>
 
     <label class="ui-g-12 ui-md-6 ui-lg-2">
@@ -12,6 +13,7 @@
       <div>
         <input pInputText type="number" min='1' max='120' formControlName="age">
       </div>
+      <div class="validation" *ngIf="checkValidation('age') != '' && personalForm.get('age').touched">{{checkValidation('age')}}</div>
     </label>
     <span class="ui-g-12 ui-md-6 ui-lg-3">
       <label>Gender
@@ -23,6 +25,7 @@
         </span>
         </span>
           </div>
+      <div class="validation" *ngIf="checkValidation('gender') != '' && personalForm.get('gender').touched">{{checkValidation('gender')}}</div>
             </label>
 
       </span>
@@ -34,22 +37,23 @@
       <div>
         <p-dropdown [options]="countryOption" (onChange)="loadCity($event.value)" formControlName="country"></p-dropdown>
       </div>
+      <div class="validation" *ngIf="checkValidation('country') != '' && personalForm.get('country').touched">{{checkValidation('country')}}</div>
     </label>
     <label class="ui-g-12 ui-md-6 ui-lg-4">City
       <div>
         <p-dropdown [options]="cityOption" formControlName="city"></p-dropdown>
       </div>
+      <div class="validation" *ngIf="checkValidation('city') != '' && personalForm.get('city').touched">{{checkValidation('city')}}</div>
     </label>
   </div>
 
 
 
   <div class="ui-g">
-    <label class="ui-g-12 ui-md-3">
-      Email
-      <div>
+    <label class="ui-g-12 ui-md-5">
+      Email (Unique, can be used 3 times for updating Medical/Sniff or Cough)
         <input pInputText type="text" formControlName="email">
-      </div>
+      <span class="validation" *ngIf="checkValidation('email') != '' && personalForm.get('email').touched">{{checkValidation('email')}}</span>
     </label>
   </div>
   <p-button label="Next" type="submit" icon="pi pi-chevron-right" iconPos="right" [disabled]="!personalForm.valid" ></p-button>

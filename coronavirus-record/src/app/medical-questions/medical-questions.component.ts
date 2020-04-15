@@ -26,16 +26,16 @@ export class MedicalQuestionsComponent implements OnInit {
     ];
     this.medicalForm = this.fb.group({
       hasBeenTest: [, Validators.required],
-      fever: [],
-      cough: [],
-      shortnessOfBreathOrDifficulty: [],
-      tiredness: [],
-      aches: [],
-      runnyNose: [],
-      soreThroat: [],
-      lossOfTheSenseOfSmell: [],
-      lossOfTaste: [],
-      noSymptoms: []
+      fever: [false],
+      cough: [false],
+      shortnessOfBreathOrDifficulty: [false],
+      tiredness: [false],
+      aches: [false],
+      runnyNose: [false],
+      soreThroat: [false],
+      lossOfTheSenseOfSmell: [false],
+      lossOfTaste: [false],
+      noSymptoms: [false]
     });
   }
 

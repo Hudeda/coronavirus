@@ -7,7 +7,7 @@ declare var $: any;
   providedIn: 'root'
 })
 export class CoronavirusService {
-
+  readonly BASE_URL = 'http://localhost:8080/patient';
   token;
   constructor(private http: HttpClient) { }
 
@@ -45,20 +45,16 @@ export class CoronavirusService {
   }
 
   savePatient(patient): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
-
-    return this.http.post('http://localhost:8080/patient', patient);
+    return this.http.post(this.BASE_URL, patient);
   }
 
   public getIPAddress(): Observable<any> {
     return this.http.get('http://api.ipify.org/?format=json');
   }
 
+  public getEmailValidation(email) {
+    return this.http.get<number>(this.BASE_URL + '/valid/' + email);
+  }
   setToken(token) {
     this.token = token.auth_token;
   }

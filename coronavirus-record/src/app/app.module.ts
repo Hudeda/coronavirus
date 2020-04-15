@@ -18,6 +18,7 @@ import { MedicalQuestionsComponent } from './medical-questions/medical-questions
 import { CoughStepComponent } from './cough-step/cough-step.component';
 import {AudioRecordingService} from './audio-recording.service';
 import { SniffStepComponent } from './sniff-step/sniff-step.component';
+import {EmailValidatorDirective} from './validations/EmailDirectiveValidators';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SniffStepComponent } from './sniff-step/sniff-step.component';
     PersonalFormComponent,
     MedicalQuestionsComponent,
     CoughStepComponent,
-    SniffStepComponent
+    SniffStepComponent,
+    EmailValidatorDirective
   ],
   imports: [
     BrowserModule,

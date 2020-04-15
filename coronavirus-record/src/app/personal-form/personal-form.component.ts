@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CoronavirusService} from '../coronavirus.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {checkEmailExsiting} from '../validations/EmailDirectiveValidators';
 
 @Component({
   selector: 'app-personal-form',
@@ -12,6 +13,7 @@ export class PersonalFormComponent implements OnInit {
   private personalForm: FormGroup;
   private cityOption = [];
   private countryOption = [];
+  emailErrorMessage = {required: 'This filed is required', email: 'Please enter a valid email ', emailValidators: 'This email as been used 3 times'};
 
   @Output() personalData = new EventEmitter();
 
@@ -39,12 +41,15 @@ export class PersonalFormComponent implements OnInit {
       gender: [, Validators.required],
       city: [, Validators.required],
       country: [, Validators.required],
-      email: [, [Validators.required, Validators.email]]
+      email: [, [Validators.required, Validators.email], checkEmailExsiting(this.coronavirusService)]
     });
   }
   ngOnInit() {
   }
 
+  checkValidation(key) {
+    return this.personalForm.get(key).errors ? this.emailErrorMessage[Object.keys(this.personalForm.get(key).errors)[0]] : '';
+  }
 
   onSubmit() {
       this.personalData.emit(this.personalForm);

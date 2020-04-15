@@ -3,40 +3,40 @@
   <div class="ui-g">
       <label class="ui-g-12 ui-md-6 ui-lg-3">Are you suffering from one of this symptoms?
         <div>
-          <p-dropdown [options]="diagnosedOption" formControlName="hasBeenTest" [placeholder]="'Choose'"></p-dropdown>
+          <p-dropdown [options]="diagnosedOption" binary=true formControlName="hasBeenTest" [placeholder]="'Choose'"></p-dropdown>
         </div>
       </label>
   </div>
 
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Fever" formControlName="fever"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Fever" binary=true formControlName="fever"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Cough" formControlName="cough"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Cough" binary=true formControlName="cough"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Shortness Of Breath Or Difficulty" formControlName="shortnessOfBreathOrDifficulty"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Shortness Of Breath Or Difficulty" binary=true formControlName="shortnessOfBreathOrDifficulty"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Tiredness" formControlName="tiredness"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Tiredness" binary=true formControlName="tiredness"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Aches" formControlName="aches"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Aches" binary=true formControlName="aches"></p-checkbox>
   </div>
   <div class="ui-g" >
-    <p-checkbox class="ui-g-3" label="Runny Nose" name="runnyNose" formControlName="runnyNose"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Runny Nose" name="runnyNose" binary=true formControlName="runnyNose"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Sore Throat" formControlName="soreThroat"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Sore Throat" binary=true formControlName="soreThroat"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Loss Of The Sense Of Smell" formControlName="lossOfTheSenseOfSmell"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Loss Of The Sense Of Smell" binary=true formControlName="lossOfTheSenseOfSmell"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="Loss Of Taste" formControlName="lossOfTaste"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="Loss Of Taste" binary=true formControlName="lossOfTaste"></p-checkbox>
   </div>
   <div class="ui-g">
-    <p-checkbox class="ui-g-3" label="No Symptoms" formControlName="noSymptoms"></p-checkbox>
+    <p-checkbox class="ui-g-12" label="No Symptoms" binary=true formControlName="noSymptoms"></p-checkbox>
   </div>
 
 <p-button label="Back" icon="pi pi-chevron-left" (click)="onBack()"></p-button>
