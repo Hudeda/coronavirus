@@ -35,13 +35,13 @@
   <div class="ui-g">
     <label  class="ui-g-12 ui-md-6 ui-lg-4">Country
       <div>
-        <p-dropdown [options]="countryOption" (onChange)="loadCity($event.value)" formControlName="country"></p-dropdown>
+        <p-dropdown [options]="countryOption" (onChange)="loadCity($event.value)" filter="true" [placeholder]="'Choose'" formControlName="country"></p-dropdown>
       </div>
       <div class="validation" *ngIf="checkValidation('country') != '' && personalForm.get('country').touched">{{checkValidation('country')}}</div>
     </label>
     <label class="ui-g-12 ui-md-6 ui-lg-4">City
       <div>
-        <p-dropdown [options]="cityOption" formControlName="city"></p-dropdown>
+        <p-dropdown [options]="cityOption" [placeholder]="'Choose'" filter="true" formControlName="city"></p-dropdown>
       </div>
       <div class="validation" *ngIf="checkValidation('city') != '' && personalForm.get('city').touched">{{checkValidation('city')}}</div>
     </label>
@@ -51,7 +51,7 @@
 
   <div class="ui-g">
     <label class="ui-g-12 ui-md-5">
-      Email (Unique, can be used 3 times for updating Medical/Sniff or Cough)
+      Email
         <input pInputText type="text" formControlName="email">
       <span class="validation" *ngIf="checkValidation('email') != '' && personalForm.get('email').touched">{{checkValidation('email')}}</span>
     </label>

@@ -13,8 +13,13 @@ export class PersonalFormComponent implements OnInit {
   private personalForm: FormGroup;
   private cityOption = [];
   private countryOption = [];
-  emailErrorMessage = {required: 'This filed is required', email: 'Please enter a valid email ', emailValidators: 'This email as been used 3 times'};
 
+  emailErrorMessage = {
+    required: 'This filed is required',
+    email: 'Please enter a valid email ',
+    emailValidators: 'This email as been used 3 times'
+  };
+  countryAndCities = [];
   @Output() personalData = new EventEmitter();
 
   @Input() set data(value) {
@@ -27,22 +32,22 @@ export class PersonalFormComponent implements OnInit {
   }
 
   constructor(private coronavirusService: CoronavirusService, private fb: FormBuilder) {
-    coronavirusService.getToken().subscribe(res => {
-      coronavirusService.setToken(res);
-      coronavirusService.getCountries().subscribe(contries => {
-        this.countryOption = contries.map( city => { return {label: city.country_name, value: city.country_name}; } );
-        this.countryOption.unshift( {label: '', value: ''});
+      coronavirusService.getCountryAndCities().subscribe(countryAndCities => {
+        this.countryAndCities = countryAndCities;
+        this.countryOption = countryAndCities.map(countryAndCity => {
+            return {label: countryAndCity.countryName, value: countryAndCity.countryName};
+          }
+        );
       });
-    });
-
-    this.personalForm = this.fb.group({
-      fullName: [, Validators.required],
-      age: [, Validators.required],
-      gender: [, Validators.required],
-      city: [, Validators.required],
-      country: [, Validators.required],
-      email: [, [Validators.required, Validators.email], checkEmailExsiting(this.coronavirusService)]
-    });
+      this.personalForm = this.fb.group({
+        fullName: [, Validators.required],
+        age: [, Validators.required],
+        gender: [, Validators.required],
+        city: [, Validators.required],
+        country: [, Validators.required],
+        email: [, [Validators.required, Validators.email]]
+      });
+  // , checkEmailExsiting(this.coronavirusService) async validation
   }
   ngOnInit() {
   }
@@ -57,10 +62,6 @@ export class PersonalFormComponent implements OnInit {
 
 
   loadCity(event) {
-    this.cityOption = [];
-    this.coronavirusService.getCities(event).subscribe( cities => {
-      this.cityOption = cities.map( city => { return {label: city.state_name, value: city.state_name}; } );
-      this.cityOption.unshift( {label: '', value: ''});
-    });
+    this.cityOption = this.countryAndCities.find(c => c.countryName === event).cities.map(city => {return {label: city, value: city}; });
   }
 }

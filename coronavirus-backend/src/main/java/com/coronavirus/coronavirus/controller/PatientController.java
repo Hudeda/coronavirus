@@ -1,6 +1,8 @@
 package com.coronavirus.coronavirus.controller;
 
+import com.coronavirus.coronavirus.module.CountryAndCities;
 import com.coronavirus.coronavirus.module.Patient;
+import com.coronavirus.coronavirus.repository.CountryAndCitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.coronavirus.coronavirus.repository.PatientRepository;
@@ -12,6 +14,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +26,8 @@ public class PatientController {
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private CountryAndCitiesRepository countryAndCitiesRepository;
 
     @GetMapping
     public List<Patient> getAllPatient() {
@@ -39,8 +45,13 @@ public class PatientController {
     }
 
     @GetMapping("country/{country}")
-    public List<Patient> getPatientsByCountry(@PathVariable String country) {
+    public List<Patient> countries(@PathVariable String country) {
         return patientRepository.findPatientByCountry(country);
+    }
+
+    @GetMapping("countryAndCities")
+    public List<CountryAndCities> countryAndCities() {
+        return countryAndCitiesRepository.findAll();
     }
 
     @GetMapping("valid/{email}")
@@ -52,19 +63,19 @@ public class PatientController {
     @PostMapping
     public Patient createPatient(@RequestPart(value = "cough") List<MultipartFile> cough,
                                  @RequestPart(value = "patient") Patient patient) throws IOException {
-        String path = new File(new File(".").getAbsolutePath()).getCanonicalPath() +"/records/" + patient.email;
+        patient.setCreatedDate(LocalDateTime.now());
+        patient = patientRepository.save(patient);
+        String path = new File(new File(".").getAbsolutePath()).getCanonicalPath() +"/records/" + LocalDate.now().toString();
         File file;
         if(Files.notExists(Paths.get(path))) {
-            file = new File(path + "/v1");
-        } else {
-            int versionNumber = Objects.requireNonNull(new File(path).list()).length + 1;
-            file = new File(path + "/v" + versionNumber);
+            file = new File(path);
+            file.mkdirs();
         }
+        file = new File(path + "/" + patient.getId());
         file.mkdirs();
         for(int i = 0;  i < cough.size(); i++){
             write(cough.get(i), Paths.get(file.getPath()), i);
         }
-        patientRepository.save(patient);
         return patient;
     }
 
