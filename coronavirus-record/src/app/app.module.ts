@@ -19,6 +19,7 @@ import { CoughStepComponent } from './cough-step/cough-step.component';
 import {AudioRecordingService} from './audio-recording.service';
 import { SniffStepComponent } from './sniff-step/sniff-step.component';
 import {EmailValidatorDirective} from './validations/EmailDirectiveValidators';
+import { GratitudeStepComponent } from './gratitude-step/gratitude-step.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {EmailValidatorDirective} from './validations/EmailDirectiveValidators';
     MedicalQuestionsComponent,
     CoughStepComponent,
     SniffStepComponent,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    GratitudeStepComponent
   ],
   imports: [
     BrowserModule,

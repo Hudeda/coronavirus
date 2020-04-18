@@ -74,6 +74,9 @@ export class AudioRecordingService {
         const currentTime = moment();
         const diffTime = moment.duration(currentTime.diff(this.startTime));
         const time = this.toString(diffTime.minutes()) + ':' + this.toString(diffTime.seconds());
+        if (time === '00:02') {
+          this.stopRecording();
+        }
         this._recordingTime.next(time);
       },
       1000

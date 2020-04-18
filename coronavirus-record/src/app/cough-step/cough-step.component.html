@@ -4,10 +4,10 @@
   </span>
   <span class="ui-g-12 ui-md-9">
   <div *ngFor="let blobUrl of blobUrls; let i = index">
-    <audio  controls>
+    <audio controls>
       <source [src]="blobUrl" type="audio/webm">
     </audio>
-    <button pButton (click)="clearRecordedData(i)" class="ui-button-danger"><i class="pi pi-trash"></i></button>
+    <i  (click)="clearRecordedData(i)" class="pi pi-trash"></i>
   </div>
   </span>
 </div>

@@ -2,7 +2,7 @@
 
   <div class="jumbotron">
     <h1 class="display-3">Coughdrop Corona Test</h1>
-    <p class="lead">CoughDrop - It's not the cough that carries you off, it's the coffin they carry you off in!
+    <p class="lead" *ngIf="!gratitude" >CoughDrop - It's not the cough that carries you off, it's the coffin they carry you off in!
       - Hi folks, well
       joking apart, this is your opportunity to help yourself by dropping off a cough (sample) so that we can
       help
@@ -10,13 +10,13 @@
       WhatsApp and send the sample to us with your basic information.</p>
   </div>
 
-  <p-steps [model]="items" [(activeIndex)]="activeIndex"></p-steps>
+  <p-steps *ngIf="!gratitude" [model]="items" [(activeIndex)]="activeIndex"></p-steps>
 
   <app-personal-form *ngIf="activeIndex === 0" [data]="dataRequest.personalData" (personalData)="personalData($event)"></app-personal-form>
   <app-medical-questions *ngIf="activeIndex === 1" [data]="dataRequest.medicallData" (onBackEvent)="medicalBack($event)" (medicalData)="medicalData($event)"></app-medical-questions>
   <app-sniff-step *ngIf="activeIndex === 2"  [data]="dataRequest.sniffData" (onBackEvent)="sniffBack($event)" (sniffData)="sniffData($event)"></app-sniff-step>
   <app-cough-step *ngIf="activeIndex === 3" [data]="dataRequest.coughData" (onBackEvent)="coughBack($event)" (coughData)="coughData($event)"></app-cough-step>
-
+  <app-gratitude-step *ngIf="!dataAsSent && gratitude" (gratitudeHome)="gratitudeHome()"></app-gratitude-step>
   <div *ngIf="dataAsSent">
     <h1> Process Data Please wait... </h1>
     <p-progressSpinner></p-progressSpinner>

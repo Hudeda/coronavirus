@@ -9,8 +9,9 @@ import {CoronavirusService} from './coronavirus.service';
 })
 export class AppComponent {
   items: MenuItem[];
-  activeIndex = 0;
+  activeIndex = 3;
   dataAsSent = false;
+  gratitude = false;
   dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
 
   constructor(private coronavirusService: CoronavirusService) {
@@ -62,6 +63,11 @@ export class AppComponent {
     this.dataRequest.medicallData = value;
   }
 
+  gratitudeHome() {
+    this.gratitude = false;
+    this.activeIndex = 0;
+  }
+
   coughData(value) {
     this.dataAsSent = true;
     this.activeIndex = 4;
@@ -78,9 +84,8 @@ export class AppComponent {
         dataFile.append('patient', new Blob([ JSON.stringify(patient) ], {type: 'application/json'}));
         this.coronavirusService.savePatient(dataFile).subscribe(res => {
           this.dataAsSent = false;
-          this.activeIndex = 0;
+          this.gratitude = true;
           this.dataRequest = {personalData: null, medicallData: null, sniffData: null, coughData: null};
-
         });
       } catch (e) {
         this.activeIndex = 3;
